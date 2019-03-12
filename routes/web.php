@@ -30,3 +30,6 @@ Route::get('/about', 'PagesController@about');
 Route::get('/services', 'PagesController@services');
 
 Route::resource('posts', 'PostsController');
+
+// Route::get('posts', 'PostsController@create');
+// Route::post('posts', 'PostsController@store');

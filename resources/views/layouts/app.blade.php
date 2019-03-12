@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ config('app.locale') }}">
+<html lang="{{config('app.locale')}}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,8 +12,9 @@
         <title>{{config('app/name', 'Test1')}}</title>
     </head>
     <body>
-        @include('inc/navbar')
+        @include('includes/navbar')
         <div class="container">
+            @include('includes/messages')
             @yield('content')
         </div>
     </body>

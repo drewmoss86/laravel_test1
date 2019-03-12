@@ -16,6 +16,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/services">Services</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/posts">Blog</a>
+                </li>
                 {{-- <li class="nav-item">
                 <a class="nav-link enabled" href="#" tabindex="-1" aria-disabled="false">Disabled</a>
                 </li> --}}
