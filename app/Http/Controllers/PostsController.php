@@ -19,7 +19,7 @@ class PostsController extends Controller
         // $posts = Post::orderBy('title', 'desc')->take(2)->get(); //allow a set number
         // $posts = Post::orderBy('title', 'desc')->get(); //descending order
         
-        $posts = Post::orderBy('title', 'desc')->paginate(10); //descending order
+        $posts = Post::orderBy('created_at', 'desc')->paginate(10); //descending order
         return view('posts/index')->with('posts', $posts);
     }
 
@@ -47,7 +47,14 @@ class PostsController extends Controller
             'body' => 'required'   //must have a body to submit
         ]);
 
-        return 123;
+        //create post
+        $post = new Post;  //create new post var
+        $post->title = $request->input('title');
+        $post->body = $request->input('body');
+        $post->user_id = auth()->user()->id;
+        $post->save();
+
+        return redirect('/posts')->with('success', 'Post Created');
     }
 
     /**
@@ -70,7 +77,8 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $p = Post::find($id);
+        return view('posts/edit')->with('p', $p);
     }
 
     /**
@@ -82,7 +90,19 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //validation 
+        $this->validate($request, [
+            'title' => 'required', //must have a title to submit
+            'body' => 'required'   //must have a body to submit
+        ]);
+
+        //update post
+        $post = Post::find($id); //since updating, just search
+        $post->title = $request->input('title');
+        $post->body = $request->input('body');
+        $post->save();
+
+        return redirect('/posts')->with('success', 'Post Updated');
     }
 
     /**
@@ -93,6 +113,9 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $p = Post::find($id);
+        $p->delete();
+
+        return redirect('/posts')->with('success', 'Post Removed');
     }
 }

@@ -33,3 +33,6 @@ Route::resource('posts', 'PostsController');
 
 // Route::get('posts', 'PostsController@create');
 // Route::post('posts', 'PostsController@store');
+Auth::routes();
+
+Route::get('/dashboard', 'DashboardController@index');
